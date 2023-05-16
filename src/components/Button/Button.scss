@@ -1,0 +1,17 @@
+.button {
+  height: 50px;
+  background: #2196f3;
+  border-radius: 5px;
+  width: 502px;
+
+  &-text {
+    font-style: normal;
+    font-size: 12px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+}
