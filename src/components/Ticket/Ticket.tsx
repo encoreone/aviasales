@@ -3,7 +3,21 @@ import React from 'react';
 import './Ticket.scss';
 
 const Ticket = () => {
-  return <h1>123123</h1>;
+  return (
+    <div className="ticket">
+      <div className="ticket-header">
+        <p>13 400 R</p>
+      </div>
+      <div className="ticket-main">
+        <div className="ticket-main-first">
+          <div className="kek">
+            <p>MOW – HKT</p>
+            <p>10:45 – 08:00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export { Ticket };

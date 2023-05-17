@@ -1,9 +1,9 @@
-import React from 'react';
+import { Ticket } from '../Ticket/Ticket';
 
 import './TicketList.scss';
 
 const TicketList = () => {
-  return <h1>TicketList</h1>;
+  return <Ticket />;
 };
 
 export { TicketList };
