@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './Tab.scss';
-
 const Tab = () => {
   return (
     <div className="tabs">

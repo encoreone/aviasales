@@ -1,13 +1,22 @@
 import React from 'react';
 
 import './Ticket.scss';
+import { useGetSearchIdQuery, useGetTicketsQuery } from '../../api/api';
 
 const Ticket = () => {
+  // const { data, isLoading, error } = useGetTicketsQuery(5);
+  const { data } = useGetSearchIdQuery(1);
+  console.log(data.searchId);
   return (
     <div className="ticket">
       <div className="ticket-header">
         <p>13 400 R</p>
       </div>
+      {/* {isLoading ? (
+        'loading'
+      ) : error ? (
+        'error'
+      ) : ( */}
       <div className="ticket-main">
         <div className="ticket-main-first">
           <div className="kek">
@@ -16,6 +25,7 @@ const Ticket = () => {
           </div>
         </div>
       </div>
+      {/* )} */}
     </div>
   );
 };
