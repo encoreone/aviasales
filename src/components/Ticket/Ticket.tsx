@@ -1,12 +1,11 @@
 import React from 'react';
 
 import './Ticket.scss';
-import { useGetSearchIdQuery, useGetTicketsQuery } from '../../api/api';
+import { useGetTicketsQuery } from '../../api/api';
 
 const Ticket = () => {
-  // const { data, isLoading, error } = useGetTicketsQuery(5);
-  const { data } = useGetSearchIdQuery(1);
-  console.log(data.searchId);
+  const { data, isLoading, error } = useGetTicketsQuery(0);
+  console.log(data);
   return (
     <div className="ticket">
       <div className="ticket-header">

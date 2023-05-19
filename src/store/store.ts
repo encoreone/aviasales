@@ -1,10 +1,6 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 
-import { ticketAPI } from '../api/api';
+import { rootReducer } from './reducer';
 
-export const store = configureStore({
-  reducer: { [ticketAPI.reducerPath]: ticketAPI.reducer },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(ticketAPI.middleware),
-});
-
-export type TypeRootState = ReturnType<typeof store.getState>;
+export const store = createStore(rootReducer, applyMiddleware(thunk));
