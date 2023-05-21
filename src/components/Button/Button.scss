@@ -3,6 +3,11 @@
   background: #2196f3;
   border-radius: 5px;
   width: 502px;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
 
   &-text {
     font-style: normal;
