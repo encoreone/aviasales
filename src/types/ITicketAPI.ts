@@ -1,4 +1,4 @@
-interface TicketSegmentsType {
+interface ITicketSegments {
   // Код города (iata)
   origin: string;
   // Код города (iata)
@@ -11,14 +11,14 @@ interface TicketSegmentsType {
   duration: number;
 }
 
-interface TicketAPIType {
+interface ITicketAPI {
   // Цена в рублях
   price: number;
   // Код авиакомпании (iata)
   carrier: string;
   // Массив перелётов.
   // В тестовом задании это всегда поиск "туда-обратно" значит состоит из двух элементов
-  segments: TicketSegmentsType[];
+  segments: ITicketSegments[];
 }
 
-export type { TicketAPIType };
+export type { ITicketAPI };

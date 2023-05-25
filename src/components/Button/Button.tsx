@@ -1,15 +1,13 @@
-import { useTypeSelector } from '../../hooks/useTypeSelector';
-
 import './Button.scss';
 
-const Button = () => {
-  const { view, loading, error } = useTypeSelector((state) => state.ticket);
+interface ButtonState {
+  onClick: () => void;
+}
 
-  if (loading || error) return <></>;
-
+const Button: React.FC<ButtonState> = ({ onClick }) => {
   return (
-    <div className="button">
-      <p className="button-text">{`Показать еще ${view} билетов!`}</p>
+    <div className="button" onClick={onClick}>
+      <p className="button-text">{'Показать еще 5 билетов!'}</p>
     </div>
   );
 };

@@ -1,15 +1,16 @@
-import React from 'react';
 import { add, format } from 'date-fns';
 
-import { TicketAPIType } from '../../types/TicketAPIType';
+import { ITicketAPI } from '../../types/ITicketAPI';
 
 import './Ticket.scss';
 
 interface TicketProps {
-  tickets: TicketAPIType;
+  tickets: ITicketAPI;
 }
 
 const Ticket: React.FC<TicketProps> = ({ tickets }) => {
+  const { carrier, segments, price } = tickets;
+
   const formatTransfer = (stops: string[]): string => {
     if (stops.length === 1) return `${stops.length} пересадка`;
     if (stops.length > 1) return `${stops.length} пересадки`;
@@ -38,22 +39,22 @@ const Ticket: React.FC<TicketProps> = ({ tickets }) => {
     return `${time} - ${secTime}`;
   };
 
-  const image = `https://pics.avs.io/99/36/${tickets.carrier}.png`;
-  const ticketBody = tickets.segments.map((ticket, index) => (
-    <div key={index} className="ticket-body-list">
+  const image = `https://pics.avs.io/99/36/${carrier}.png`;
+  const ticketBody = segments.map((item, index) => (
+    <div key={`${item.duration}-${index}`} className="ticket-body-list">
       <div className="ticket-body-list-col">
         <div className="ticket-body-list-title">
-          {ticket.destination} - {ticket.origin}
+          {item.destination} - {item.origin}
         </div>
-        <div className="ticket-body-list-desc">{formatFlight(ticket.date, ticket.duration)}</div>
+        <div className="ticket-body-list-desc">{formatFlight(item.date, item.duration)}</div>
       </div>
       <div className="ticket-body-list-col">
         <div className="ticket-body-list-title">В пути</div>
-        <div className="ticket-body-list-desc">{formatTime(ticket.duration)}</div>
+        <div className="ticket-body-list-desc">{formatTime(item.duration)}</div>
       </div>
       <div className="ticket-body-list-col">
-        <div className="ticket-body-list-title">{formatTransfer(ticket.stops)}</div>
-        <div className="ticket-body-list-desc">{ticket.stops.join(', ')}</div>
+        <div className="ticket-body-list-title">{formatTransfer(item.stops)}</div>
+        <div className="ticket-body-list-desc">{item.stops.join(', ')}</div>
       </div>
     </div>
   ));
@@ -61,7 +62,7 @@ const Ticket: React.FC<TicketProps> = ({ tickets }) => {
   return (
     <div className="ticket">
       <div className="ticket-header">
-        <p className="ticket-price">{formatCurrency(tickets.price)}</p>
+        <p className="ticket-price">{formatCurrency(price)}</p>
         <img src={image} alt="logo" />
       </div>
       <div className="ticket-body">{ticketBody}</div>

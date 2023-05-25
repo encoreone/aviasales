@@ -1,4 +1,3 @@
-import { Button } from '../Button';
 import { Filter } from '../Filter';
 import { Header } from '../Header';
 import { Tab } from '../Tab';
@@ -17,7 +16,6 @@ const App = () => {
         <div className="App-block-right">
           <Tab />
           <TicketList />
-          <Button />
         </div>
       </section>
     </div>

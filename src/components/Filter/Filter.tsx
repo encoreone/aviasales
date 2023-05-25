@@ -1,6 +1,19 @@
+import { toggleAll, toggleCurrent } from '../../store/reducers/filterSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/useTypeSelector';
+
 import './Filter.scss';
 
 const Filter = () => {
+  const dispatch = useAppDispatch();
+  const filtersStatus = useAppSelector((state) => state.filter);
+  const filters = [
+    { id: 'all', name: 'Все', action: toggleAll },
+    { id: 'zero', name: 'Без пересадок', action: toggleCurrent },
+    { id: 'one', name: '1 пересадка', action: toggleCurrent },
+    { id: 'two', name: '2 пересадки', action: toggleCurrent },
+    { id: 'tree', name: '3 пересадки', action: toggleCurrent },
+  ];
+
   return (
     <div className="filter">
       <div className="filter-title">
@@ -8,10 +21,18 @@ const Filter = () => {
       </div>
       <div className="filter-buttons">
         <div className="filter-buttons__item">
-          <input className="filter-buttons__checkbox" type="checkbox" name="all" id="all" />
-          <label className="filter-buttons__label" htmlFor="all">
-            Все
-          </label>
+          {filters.map((filter) => (
+            <label key={`filter-${filter.id}`} htmlFor={`checkbox-${filter.id}`}>
+              <input
+                type="checkbox"
+                name="filters"
+                id={`checkbox-${filter.id}`}
+                checked={filtersStatus[filter.id]}
+                onChange={() => dispatch(filter.action(filter.id))}
+              />
+              {filter.name}
+            </label>
+          ))}
         </div>
       </div>
     </div>
