@@ -16,8 +16,9 @@ const Tab = () => {
   return (
     <div className="tabs">
       {tabs.map((tab, index) => (
-        <span key={index}>
+        <span key={index} style={{ flexGrow: 1 }}>
           <input
+            className="tabs-input"
             type="radio"
             hidden
             id={`${tab.id}`}
@@ -27,7 +28,9 @@ const Tab = () => {
               dispatch(changeSort(tab.id));
             }}
           />
-          <label htmlFor={`${tab.id}`}>{tab.value}</label>
+          <label className="tabs-button" htmlFor={`${tab.id}`}>
+            {tab.value}
+          </label>
         </span>
       ))}
     </div>

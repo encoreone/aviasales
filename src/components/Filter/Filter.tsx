@@ -20,20 +20,19 @@ const Filter = () => {
         <p className="filter-text">Количество пересадок</p>
       </div>
       <div className="filter-buttons">
-        <div className="filter-buttons__item">
-          {filters.map((filter) => (
-            <label key={`filter-${filter.id}`} htmlFor={`checkbox-${filter.id}`}>
-              <input
-                type="checkbox"
-                name="filters"
-                id={`checkbox-${filter.id}`}
-                checked={filtersStatus[filter.id]}
-                onChange={() => dispatch(filter.action(filter.id))}
-              />
-              {filter.name}
-            </label>
-          ))}
-        </div>
+        {filters.map((filter) => (
+          <label key={`filter-${filter.id}`} className="filter-buttons-item" htmlFor={`checkbox-${filter.id}`}>
+            <input
+              className="filter-buttons-input"
+              type="checkbox"
+              name="filters"
+              id={`checkbox-${filter.id}`}
+              checked={filtersStatus[filter.id]}
+              onChange={() => dispatch(filter.action(filter.id))}
+            />
+            {filter.name}
+          </label>
+        ))}
       </div>
     </div>
   );
