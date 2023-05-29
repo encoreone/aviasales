@@ -1,3 +1,3 @@
 Aviasales
 ----
-[ссылочка](https://aviasales-silk.vercel.app)
+[ссылочка](https://aviasales-encoreone.vercel.app/)
