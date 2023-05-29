@@ -42,6 +42,7 @@ const TicketList = () => {
         .filter((ticket) =>
           ticket?.segments.every(
             (segment) =>
+              (!filters.all && segment.stops.length === Math.round(0 - 0.5 + Math.random() * (4 - 0 + 1))) ||
               (filters.zero && segment.stops.length === 0) ||
               (filters.one && segment.stops.length === 1) ||
               (filters.two && segment.stops.length === 2) ||
