@@ -63,7 +63,7 @@ const Ticket: React.FC<TicketProps> = ({ tickets }) => {
     <div className="ticket">
       <div className="ticket-header">
         <p className="ticket-price">{formatCurrency(price)}</p>
-        <img src={image} alt="logo" />
+        <img src={image} width="99" height="36" alt="logo" />
       </div>
       <div className="ticket-body">{ticketBody}</div>
     </div>

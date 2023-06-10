@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ITab } from '../../types/ITab';
 
 const initialState: ITab = {
-  currentState: 'cheap',
+  currentState: 'base',
 };
 
 export const tabSlice = createSlice({

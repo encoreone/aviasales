@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Alert } from 'antd';
 
 import { Ticket } from '../Ticket/Ticket';
@@ -19,15 +19,31 @@ const TicketList = () => {
   const sort = useAppSelector((state) => state.ticket.sort);
   const filters = useAppSelector((state) => state.filter);
 
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener('online', handleStatusChange);
+    window.addEventListener('offline', handleStatusChange);
+
+    return () => {
+      window.removeEventListener('online', handleStatusChange);
+      window.removeEventListener('offline', handleStatusChange);
+    };
+  }, [isOnline]);
+
   useEffect(() => {
     dispatch(getSearchId());
   }, []);
 
   useEffect(() => {
-    if (loading && searchId) {
+    if (loading && searchId && isOnline) {
       dispatch(getTickets(searchId));
     }
-  }, [searchId, tickets]);
+  }, [searchId, tickets, isOnline]);
 
   const sortBy = (type: string) => {
     if (type === 'cheap') return (a: ITicketAPI, b: ITicketAPI) => a.price - b.price;
@@ -42,7 +58,6 @@ const TicketList = () => {
         .filter((ticket) =>
           ticket?.segments.every(
             (segment) =>
-              (!filters.all && segment.stops.length === Math.round(0 - 0.5 + Math.random() * (4 - 0 + 1))) ||
               (filters.zero && segment.stops.length === 0) ||
               (filters.one && segment.stops.length === 1) ||
               (filters.two && segment.stops.length === 2) ||
@@ -65,8 +80,8 @@ const TicketList = () => {
   const ticketsView = allTickets.slice(0, view);
   return (
     <>
-      {loading && <Loading />}
-      {allTickets.length === 0 && !loading && nonFilterComponent()}
+      {isOnline ? loading && <Loading /> : <p>Sorry your not online =l</p>}
+      {allTickets.length === 0 && nonFilterComponent()}
       {allTickets.length > 0 &&
         ticketsView.map((item, index) => <Ticket key={`${item.price}-${index}`} tickets={item} />)}
       {allTickets.length > 0 && <Button onClick={() => dispatch(changeView())} />}
